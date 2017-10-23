@@ -4,21 +4,8 @@ function show_workers(){
 
         $.getJSON(Flask.url_for("display_data"))
         .done(function(data, textStatus, jqXHR) {
-            header = 'Total workers: ' + data.length;
-            content = '<table id="table1"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%">'+
-            '<thead>'+
-                '<tr>'+
-                    '<th>Worker</th>'+
-                    '<th>Algo</th>'+
-                    '<th>Speed</th>'+
-                    '<th>Rejected</th>'+
-                    '<th>Diff</th>'+
-                    '<th>Time</th>'+
-                    '<th>Last seen (min)</th>'+
-                '</tr>'+
-            '</thead>';
-
-            content += ' <tbody>';
+            total_workers = data.length;
+            content ='';
             current_active = 0;
             for(var i = 0; i < data.length; i++) {
 
@@ -47,15 +34,12 @@ function show_workers(){
                     content += '<td>' + name+'</td><td>' + algo_name +'</td><td>' + accepted + ' ' + suffix +'</td><td>' +rejected +'</td><td>' +diff +'</td><td>' +time +'</td><td>' + last_seen +'</td></tr>';
 
             }
-            header += '.  Active: ' + current_active;
-            content += '</tbody></table>';
+            active_workers = current_active;
+            worker_info = current_active + '/' + total_workers;
             console.log(content);
-            $('#quote').html(content);
-            $('#header').html(header);
+            $('#body').html(content);
+            $('#wallet_workers').html(worker_info);
 
-            $("tr").click(function(){
-            $(this).addClass("selected").siblings().removeClass("selected");
-            });
 
         });
 
