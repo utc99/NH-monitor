@@ -18,7 +18,6 @@ function show_workers(){
                 '</tr>'+
             '</thead>';
 
-
             content += ' <tbody>';
             current_active = 0;
             for(var i = 0; i < data.length; i++) {
