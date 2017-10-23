@@ -1,0 +1,102 @@
+.container
+{
+    /* center contents */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* colors for navbar */
+.navbar-default .navbar-brand .blue
+{
+    color: #537fbe;
+}
+.navbar-default .navbar-brand .red
+{
+    color: #ea433b;
+}
+.navbar-default .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+.navbar-default .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+main .form-control-2
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: 90%;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+main td
+{
+    /* left-align tables' cells */
+    text-align: left;
+}
+
+#table1 tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#table1 {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+#table1 th, #table1 td {
+  text-align: left;
+  padding: 5px;
+}
+#table1 tr.header, #table1 tr:hover, tr.selected{
+  background-color: #f1f1f1;
+}
+#table1 tr.inactive{
+  background-color: #D63232;
+}
+#table1 tr.active{
+  background-color: #28AB28;
+}
+#table1 tr.inactive_long{
+  background-color: #A9A9A9;
+}
+.wallet_address{
+  text-align: left;
+}
+.wallet_col{
+    border: 2px solid #fba342;
+    border-radius: 5px;
+    display:inline-table;
+    padding: 10px 0px;
+    margin: 0;
+    width: 25%;
+    margin-right: 30px;
+    float: left;
+
+}
+.wallet_col h2{
+  background: #fba342;
+  color: #fff;
+  font-size: 16px;
+  padding: 15px 0px;
+  display:block
+}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Finance
+{% endblock %}
+
+{% block main %}
+<h3>{{title|safe}}</h3>
+    <body onload="show_workers(); refresh();">
+
+    <h3 class="wallet_address" id="address"></h3>
+
+    <div class="wallet">
+		<div class="wallet_col">
+			<h2>Profitability</h2>
+			<div class="wallet_content" id="wallet_profitability"><small>BTC/day</small> <sub><span class="fiatAmount">16.96</span> <small><span class="fiatCurrency">USD</span>/day</small></sub></div>
+		</div>
+		<div class="wallet_col">
+			<h2>Workers</h2>
+			<div class="wallet_content" id="wallet_workers"></div>
+		</div>
+		<div class="wallet_col">
+			<h2>Unpaid balance</h2>
+			<div class="wallet_content" id="wallet_unpaid">0.00274440 <small>BTC</small> <sub><span class="fiatAmount">16.7161 </span> <small><span class="fiatCurrency">USD</span></small></sub></div>
+		</div>
+	</div>
+
+        <p id="quote"></p>
+    </body>
+{% endblock %}
