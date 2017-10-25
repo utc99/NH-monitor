@@ -75,7 +75,6 @@ def changepass(currentpass,newpass1):
 #-------------------------------------------------------------------------
 
 def get_JSON(link,address=0):
-
         try:
             if address != 0:
                 with urllib.request.urlopen(link.format(urllib.parse.quote(address, safe=""))) as url:
@@ -109,11 +108,14 @@ def get_new_algo(address):
 def get_new_profitability():
     return get_JSON("https://api.nicehash.com/api?method=simplemultialgo.info")
 
+def get_wallet_stats(address):
+    return get_JSON("https://api.nicehash.com/api?method=stats.provider&addr={}", address)
 
 def set_exchange_rate():
 
     new_rates = get_exchange_rate()
-    # = get_JSON("https://blockchain.info/ticker")
+    if new_rates == -1:
+        return
 
     for key,value in new_rates.items():
 
@@ -136,10 +138,9 @@ def alert_user(message, alert_type, page):
 #-------------------------------------------------------------------------
 def update_algo_profitability():
 
-    if get_new_profitability() == -1:
-        return
-
     algo_data = get_new_profitability()
+    if algo_data == -1:
+        return
     algo_data = algo_data['result']['simplemultialgo']
     for item in algo_data:
         algo_nr = item['algo']
@@ -161,26 +162,25 @@ def update_algo_profitability():
             db.execute("UPDATE algos SET profitability=:profitability WHERE algo_nr =:algo_nr",
             profitability=profitability, algo_nr=algo_nr)
 
-# Update data for every worker in every wallet
 #-------------------------------------------------------------------------
 def update_workers():
 
-    db.execute("DELETE FROM history")       # Delete old history
+    db.execute("DELETE FROM history")
 
     wallets = db.execute("SELECT wallet_address FROM wallets WHERE 1")
-    for item in wallets:                        # Iterate trough all the wallets
+    for item in wallets:
 
         wallet = item['wallet_address']
-        workers = get_worker_data(wallet)
-        if workers == -1:       # If no data from api, skip the update of the current wallet
-            continue
+        workers = get_worker_data(wallet)         # retrieve and show data
+        if workers == -1:
+            return
         workers = workers['result']['workers']
+        get_unpaid_balance(wallet)
         total_profit = 0.0
-        old_algo_nr = 100
-        profitability = 0.0
 
         for worker in workers:
 
+            profitability = 0.0
 
             worker_name = worker[0]
             time = worker[2]
@@ -210,18 +210,17 @@ def update_workers():
             db.execute("INSERT INTO history (wallet_address,worker_name,algo) VALUES(:wallet, :worker_name, :algo_nr)",
                 wallet=wallet, worker_name=worker_name, algo_nr=algo_nr)
 
-            if algo_nr != old_algo_nr:                     #remove unnecessary SQL queries if the algo_nr haven't changed
-                old_algo_nr = algo_nr
-                algos =  db.execute("SELECT NULL FROM algos WHERE algo_nr =:algo_nr", algo_nr=algo_nr)
-                if len(algos) != 1:
-                    get_new_algo_data(wallet)
+            algos =  db.execute("SELECT NULL FROM algos WHERE algo_nr =:algo_nr", algo_nr=algo_nr)
+            if len(algos) != 1:
+                get_new_algo_data(wallet)
 
-                profitability = db.execute("SELECT profitability FROM algos WHERE algo_nr =:algo_nr", algo_nr=algo_nr)
-                profitability = profitability[0]['profitability']
 
+            profitability = db.execute("SELECT profitability FROM algos WHERE algo_nr =:algo_nr", algo_nr=algo_nr)
+
+            profitability = profitability[0]['profitability']
             total_profit += float(profitability) * accepted
 
-        total_profit = "{:.5f}".format(total_profit)
+        total_profit = "{:.4f}".format(total_profit)
         db.execute('UPDATE wallets SET total_profitability=:total_profit WHERE wallet_address =:wallet',total_profit=total_profit, wallet=wallet)
 
     db.execute('UPDATE workers SET last_seen = CAST ((JulianDay(CURRENT_TIMESTAMP) - JulianDay(timestamp)) * 24 * 60 AS Integer ) WHERE NOT EXISTS ( SELECT NULL FROM history WHERE workers.worker_name = history.worker_name AND workers.algo = history.algo)')
@@ -232,6 +231,9 @@ def update_workers():
 def get_new_algo_data(address):
 
     result = get_new_algo(address)         # retrieve data.
+    if result == -1:
+        return
+
     current_data = result['result']['current']
 
     for item in current_data:
@@ -248,4 +250,19 @@ def get_new_algo_data(address):
 
     update_algo_profitability()
 
+    return
+
+#-------------------------------------------------------------------------
+def get_unpaid_balance(address):
+
+    result = get_wallet_stats(address)         # retrieve data.
+    if result == -1:
+        return
+    current_data = result['result']['stats']
+    unpaid_balance = 0.0
+    for item in current_data:
+        unpaid_balance += float(item['balance'])
+
+    unpaid_balance = "{:.4f}".format(unpaid_balance)
+    db.execute('UPDATE wallets SET unpaid_balance=:unpaid_balance WHERE wallet_address =:address',unpaid_balance=unpaid_balance, address=address)
     return

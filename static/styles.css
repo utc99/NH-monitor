@@ -7,18 +7,6 @@
 }
 
 /* colors for navbar */
-.navbar-default .navbar-brand .blue
-{
-    color: #537fbe;
-}
-.navbar-default .navbar-brand .red
-{
-    color: #ea433b;
-}
-.navbar-default .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
 .navbar-default .navbar-brand .green
 {
     color: #339933;
@@ -59,9 +47,11 @@ main td
 
 #table1 {
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
   border: 1px solid #ddd;
   font-size: 12px;
+  margin-left:5%;
+  margin-right:5%;
 }
 #table1 th, #table1 td {
   text-align: left;
@@ -71,7 +61,7 @@ main td
   background-color: #f1f1f1;
 }
 #table1 tr.inactive{
-  background-color: #D63232;
+  background-color: #990000;
 }
 #table1 tr.active{
   background-color: #339933;
@@ -93,11 +83,12 @@ main td
     margin-right: 30px;
     float: left;
     text-align:center;
-    font-size:16px;
+    font-size:24px;
     font-weight:700;
-    height:80px;
+    height:150px;
     margin-top: 20px;
     margin-bottom: 30px;
+    min-width: 200px;
 }
 .wallet_col h2{
   background: #339933;
@@ -110,4 +101,17 @@ main td
 }
 .wallet {
   margin-left: 15%;
+}
+.small {
+  display:block;
+  font-size: 12px;
+}
+.sub {
+  display:block;
+  font-weight:100;
+}
+.fiat{
+  font-weight:500;
+  font-size: 16px;
+  color: #A9A9A9;
 }

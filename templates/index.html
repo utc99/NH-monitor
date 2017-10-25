@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Finance
+    Main
 {% endblock %}
 
 {% block main %}
@@ -13,20 +13,20 @@
     <div class="wallet">
 		<div class="wallet_col">
 			<h2>Profitability</h2>
-			<div class="wallet_content" id="wallet_profitability"><small>BTC/day</small> <sub><span class="fiatAmount">16.96</span> <small><span class="fiatCurrency">USD</span>/day</small></sub></div>
-		</div>
+			<div class="wallet_content"><span id="wallet_profitability"></span><span>BTC/day</span></br><sub class="fiat" id="fiat_current"></sub></div>
+			</div>
 		<div class="wallet_col">
 			<h2>Workers</h2>
 			<div class="wallet_content" id="wallet_workers"></div>
 		</div>
 		<div class="wallet_col">
 			<h2>Unpaid balance</h2>
-			<div class="wallet_content" id="wallet_unpaid">0.00274440 <small>BTC</small> <sub><span class="fiatAmount">16.7161 </span> <small><span class="fiatCurrency">USD</span></small></sub></div>
+			<div class="wallet_content"></div><span id="wallet_unpaid"></span><span>BTC</span></br><sub class="fiat" id="fiat_unpaid"></sub></div>
 		</div>
 	</div>
 
 
-    <table id="table1"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <table class = "main_table" id="table1"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%">
         <thead>
             <tr>
                 <th>Worker</th>

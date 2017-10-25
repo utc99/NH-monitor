@@ -102,10 +102,36 @@ def give_wallet():
         return jsonify({"status":"fail","url":destination})
 
 #-------------------------------------------------------------------------
+@app.route("/give_exchange_rate", methods=["GET"])
+def give_exchange_rate():
+
+    if "user_id" in session:
+        id=session["user_id"]
+
+        data =  db.execute("SELECT rate FROM exchange_rates JOIN users ON exchange_rates.currency = users.currency WHERE users.id=:id", id=id)
+        return jsonify(data)
+
+    else:
+        destination = url_for('login')
+        return jsonify({"status":"fail","url":destination})
+
+#-------------------------------------------------------------------------
 def backround_tasks():
     set_exchange_rate()
     update_algo_profitability()
     update_workers()
+
+#-------------------------------------------------------------------------
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+
+    # if user reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        print("POST")
+    else:
+        return render_template("settings.html")      # initial change password page
+
 
 #-------------------------------------------------------------------------
 @app.route("/change_password", methods=["GET", "POST"])
