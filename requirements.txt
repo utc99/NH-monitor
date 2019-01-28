@@ -1,4 +1,8 @@
-Flask
+SQLAlchemy
 Flask-Session
 passlib
-SQLAlchemy
+feedparser
+flask_jsglue
+schedule
+apscheduler
+cs50
