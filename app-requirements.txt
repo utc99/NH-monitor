@@ -6,4 +6,3 @@ flask_jsglue
 schedule
 apscheduler
 cs50
-cs50
