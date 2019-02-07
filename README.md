@@ -8,7 +8,7 @@ how many you had, and search for it in site, double check if it's missing, and o
 I created an app that uses NH api's to collect data, show it in the page, and keep history of it. So when one of the miners are
 missing, you can clearly see it.
 
-Initial test user: tester1 - tester1
+Initial test user: 123 - 123321
 
 Use cases:
 *Register an new account
@@ -28,15 +28,9 @@ Known bugs:
 the same(eg. Machine1), only one will be displayed. NH API do not give data that would let server to distinguish between those two
 for history keeping, while we need to know which one is which if we track the history
 
-*For some reason after a while, this application works slower and slower, first rounds takes 3-6 secs, starts overloading after 20 minutes and bumps up to 300+ secs over 24hrs.
-Memmory size do not increase, all CPU gets used up, maybe it's an Cloud 9 IDE trying to save a working power, or some kind of cpu leak,
-didn't found solutions for that at the momment.
-
 Future improvements:
 
 *IF a worker is lost for a certain amount of time, send an email notification.
-(Did a testings with gmail email sending, works good, if i'll continue to use NH, I'm going to implament it later)
-
 *Minor fixes
 
 
