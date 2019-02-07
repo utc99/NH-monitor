@@ -5,20 +5,127 @@
 {% endblock %}
 
 {% block main %}
+<h3>{{title|safe}}</h3>
+<h3 id="alerts"></h3>
+    <body onload="settings();">
 
-    <body>
+    <div class="col-md-3 col-xs-12">
         <div class="list-settings" id="list-settings">
-            <a href="#sectionSummary" class="list-group-item active">
+            <a href="#sectionSummary" class="list-group-item summary" id="sectionSummaryClick">
                 Summary
             </a>
-            <a href="#sectionPassword" class="list-group-item">
+            <a href="#sectionWallets" class="list-group-item wallets" id="sectionWalletsClick">
                 Wallets
             </a>
-            <a href="#sectionEnableAccount" class="list-group-item">
+            <a href="#sectionPassword" class="list-group-item password" id="sectionPasswordClick">
                 Password
             </a>
             <hr>
         </div>
+    </div>
+
+    <div class="col-md-9 col-xs-12" id="parentSection">
+
+        <div class="settings password" id="sectionPassword">
+            <h2 class="settings-title">Change password</h2>
+
+            <div class="form-group">
+                <label for="currentPassword" class="col-md-3 pass_input">Current Password</label>
+                <div class="col-md-7">
+                    <input autocomplete="off" class="form-control" id="current_password" name="current_password" placeholder="Current Password" type="password">
+                </div>
+
+
+                <label for="newPassword" class="col-md-3 pass_input">New Password</label>
+                <div class="col-md-7">
+                    <input autocomplete="off" class="form-control" id="new_password_1" name="new_password_1" placeholder="New Password" type="password">
+                </div>
+
+
+                <label for="confirmPassword" class="col-md-3 pass_input">Confirm Password</label>
+                <div class="col-md-7">
+                    <input autocomplete="off" class="form-control" id="new_password_2" name="new_password_2" placeholder="Confirm New Password" type="password" onsubmit="change_pass()">
+                </div>
+
+            </div>
+
+
+            <br/><br/>
+
+            <div class="col-md-3">
+                <div class="form-group" id="passwor-form">
+                    <button class="btn btn-primary" id="update_password" onclick="change_pass()">
+                        Update password
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings wallet" id="sectionWallets">
+
+            <div class="col-md-8">
+                <h2 class="settings-title">Wallets</h2>
+            </div>
+
+            <div id="POItablediv">
+                <table id="POITable" border="1">
+                    <tr class="address_row" id="address_row" >
+                        <td><input size=40 type="text" id="addr" value=""/></td>
+                        <td><input type="button" id="delPOIbutton" value="Delete" onclick="deleteRow(this)"/></td>
+                    </tr>
+                </table>
+                <br/><br/>
+
+                <div class="row">
+                    <div class="form-group" id="wallets-form">
+
+                            <button class="btn btn-primary" id="add_wallet" onclick="addInputLIne()">
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                                Add wallet
+                            </button>
+
+                            <button class="btn btn-success" id="save_wallet" onclick="update_wallets()">
+                                <span class="glyphicon glyphicon-ok-circle"></span>
+                                Update
+                            </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings summary" id="sectionSummary">
+            <div class="col-md-8">
+                <h2 class="settings-title">Account Information</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="settings-content"> User Name: <span id="user_name" style="margin-left:0px"></span>
+                    </div>
+                    <div class="settings-content"> Email:
+                        <span id="email" style="margin-left:0px">
+                            <input autocomplete="off" id="email_input" name="email" type="email"/>
+                        </span>
+                    </div>
+                    <div class="settings-content"> Currency:
+                        <span id="user_currency" style="margin-left:0px">
+                            <div id="currency-selector">
+                                <select id="currency-selector-items"></select>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="form-group" id="summary-form">
+                        <button class="btn btn-success" id="save_wallet" onclick="update_summary()">
+                            <span class="glyphicon glyphicon-ok-circle"></span>
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 
     </body>
 {% endblock %}

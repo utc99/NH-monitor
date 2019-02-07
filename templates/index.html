@@ -6,27 +6,37 @@
 
 {% block main %}
 <h3>{{title|safe}}</h3>
-    <body onload="show_workers(); refresh();">
+    <body onload="show_wallets(); refresh();">
 
-    <h3 class="wallet_address" id="address"></h3>
+    <div id="selector">
+        <select id="selector-items"></select>
+    </div>
 
-    <div class="wallet">
+    <div class="wallet_index">
 		<div class="wallet_col">
 			<h2>Profitability</h2>
-			<div class="wallet_content"><span id="wallet_profitability"></span><span>BTC/day</span></br><sub class="fiat" id="fiat_current"></sub></div>
+			<div class="wallet_content">
+			    <span id="wallet_profitability"></span>
+			    <span>BTC/day</span></br>
+			    <sub class="fiat" id="fiat_current"></sub>
 			</div>
+		</div>
 		<div class="wallet_col">
 			<h2>Workers</h2>
 			<div class="wallet_content" id="wallet_workers"></div>
 		</div>
 		<div class="wallet_col">
 			<h2>Unpaid balance</h2>
-			<div class="wallet_content"></div><span id="wallet_unpaid"></span><span>BTC</span></br><sub class="fiat" id="fiat_unpaid"></sub></div>
+			<div class="wallet_content"></div>
+			    <span id="wallet_unpaid"></span>
+			    <span>BTC</span></br>
+			    <sub class="fiat" id="fiat_unpaid"></sub>
 		</div>
 	</div>
 
 
-    <table class = "main_table" id="table1"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <table class = "main_table" id="table1"><col width="10%"><col width="10%"><col width="10%"><col width="10%">
+                                            <col width="10%"><col width="10%"><col width="10%"><col width="5%">
         <thead>
             <tr>
                 <th>Worker</th>
@@ -36,6 +46,7 @@
                 <th>Diff</th>
                 <th>Time</th>
                 <th>Last seen (min)</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="body"></tbody>

@@ -47,27 +47,29 @@ main td
 
 #table1 {
   border-collapse: collapse;
-  width: 90%;
+  width: 80%;
   border: 1px solid #ddd;
   font-size: 12px;
-  margin-left:5%;
-  margin-right:5%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom: 100px;
 }
 #table1 th, #table1 td {
   text-align: left;
   padding: 5px;
 }
-#table1 tr.header, #table1 tr:hover, tr.selected{
-  background-color: #f1f1f1;
+#table1 tbody tr:hover td, #table1 tbody tr:hover th {
+  background-color: #737373;
 }
+
 #table1 tr.inactive{
-  background-color: #990000;
+  background-color: #ff4d4d;
 }
 #table1 tr.active{
-  background-color: #339933;
+  background-color: #00b33c;
 }
 #table1 tr.inactive_long{
-  background-color: #A9A9A9;
+  background-color: #999999;
 }
 .wallet_address{
   text-align: left;
@@ -99,7 +101,7 @@ main td
   margin-top: -15px;
 
 }
-.wallet {
+.wallet_index {
   margin-left: 15%;
 }
 .small {
@@ -114,4 +116,77 @@ main td
   font-weight:500;
   font-size: 16px;
   color: #A9A9A9;
+}
+.col-md-3 col-xs-12{
+  width:25%;
+}
+.col-md-9 col-xs-12{
+  width:50%;
+}
+.col-md-8 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+
+}
+.settings-title{
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: left;
+    padding-bottom: 30px;
+}
+.settings-wallet{
+
+}
+
+.settings-content{
+    padding-right: 15px;
+    padding-left: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-weight:600;
+    width: 80%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#user_name, #user_currency {
+  font-weight:300;
+  float: right;
+}
+#selector-items {
+  text-align: left;
+  font-size: 20px;
+}
+#selector {
+  margin:0;
+  text-align: left;
+}
+#address_row {
+  Display:None;
+}
+.address_row {
+  Display:block;
+}
+#wallets-form{
+  text-align: left;
+  padding-left: 30px;
+}
+#parentSection{
+  Display:None;
+}
+#POItablediv{
+  width:60%;
+}
+#summary-form{
+  text-align: left;
+  margin: 20px;
+}
+
+#email_input{
+  float: right;
+  height: 25px;
+  width: 70%;
+  text-align: center;
 }
