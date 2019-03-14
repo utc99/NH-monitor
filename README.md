@@ -31,6 +31,6 @@ for history keeping, while we need to know which one is which if we track the hi
 Future improvements:
 
 *IF a worker is lost for a certain amount of time, send an email notification.
-*Minor fixes.
+*Minor fixes
 
 
